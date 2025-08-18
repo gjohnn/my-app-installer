@@ -14,7 +14,7 @@ Está inspirado en el estilo de Chris Titus, con interfaz sencilla y organizada 
 - Modular: catálogo de apps, lógica de instalación y GUI separados para fácil mantenimiento y escalabilidad.  
 - Posibilidad de ejecutar directamente desde un comando tipo:  
 ```powershell
-iwr -useb https://miweb.com/main.ps1 | iex
+# iwr -useb https://miweb.com/main.ps1 | iex
 ```
 
 ---
