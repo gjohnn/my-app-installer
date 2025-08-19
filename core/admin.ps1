@@ -1,14 +1,20 @@
-function Ensure-Admin {
+function Assert-Admin {
     $principal = New-Object Security.Principal.WindowsPrincipal(
         [Security.Principal.WindowsIdentity]::GetCurrent()
     )
+
     if (-not $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-        Write-Host "🔑 Reiniciando como Administrador..."
+        Write-Host "Reiniciando como Administrador..."
 
-        $script = $MyInvocation.MyCommand.Definition  # ruta al script actual
+        # archivo que disparó este proceso (main.ps1)
+        $script = $MyInvocation.PSCommandPath  
 
-        Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$script`"" -Verb RunAs
+        Start-Process "powershell.exe" -ArgumentList @(
+            "-NoProfile",
+            "-ExecutionPolicy", "Bypass",
+            "-File", $script
+        ) -Verb RunAs
 
-        exit  # mata el proceso no-admin y deja corriendo el elevado
+        exit
     }
 }
