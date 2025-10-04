@@ -12,9 +12,9 @@ Está inspirado en el estilo de Chris Titus, con interfaz sencilla y organizada 
 - Interfaz gráfica con **checkboxes** agrupados por categorías.  
 - Funciona siempre con **privilegios de administrador**.  
 - Modular: catálogo de apps, lógica de instalación y GUI separados para fácil mantenimiento y escalabilidad.  
-- Posibilidad de ejecutar directamente desde un comando tipo:  
+- Posibilidad de ejecutar directamente desde un comando tipo (dentro de la carpeta):  
 ```powershell
-# iwr -useb https://miweb.com/main.ps1 | iex
+powershell -NoExit -ExecutionPolicy Bypass -Command ".\main.ps1" 
 ```
 
 ---
