@@ -20,6 +20,7 @@ try {
         "$PSScriptRoot\core\admin.ps1",
         "$PSScriptRoot\core\apps.ps1", 
         "$PSScriptRoot\core\installer.ps1",
+        "$PSScriptRoot\core\wrapper.ps1",
         "$PSScriptRoot\ui\gui.ps1"
     )
     
@@ -33,6 +34,10 @@ try {
     }
     
     Write-Host "Modulos cargados correctamente" -ForegroundColor Green
+    
+    # Verificar que las funciones críticas estén disponibles
+    Write-Host "Verificando funciones..." -ForegroundColor Cyan
+    Test-InstallerFunctions
 }
 catch {
     Write-Host "" 

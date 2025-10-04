@@ -5,16 +5,16 @@ $global:ApplicationCategories = @{
         "Google Chrome"     = "Google.Chrome"
         "Mozilla Firefox"   = "Mozilla.Firefox"
         "Microsoft Edge"    = "Microsoft.Edge"
-        "Zen Browser"       = "Zen-Team.Zen-Browser"
-        "Brave Browser"     = "Brave.Brave"
+        "Zen Browser"       = "Zen-Team.Zen-Browser"     # no confirmé este
+        "Brave Browser"     = "Brave.Brave"                # funciona: :contentReference[oaicite:0]{index=0}
     }
     
     "Productividad" = @{
         "Visual Studio Code"  = "Microsoft.VisualStudioCode"
         "Notepad++"           = "Notepad++.Notepad++"
         "7-Zip"               = "7zip.7zip"
-        "WinRAR"              = "win.rar.WinRAR"
-        "Adobe Acrobat Reader" = "Adobe.Acrobat.Reader.64-bit"
+        "WinRAR"              = "RARLab.WinRAR"               # corregido; el ID original estaba mal :contentReference[oaicite:1]{index=1}
+        "Adobe Acrobat Reader" = "Adobe.Acrobat.Reader.64-bit" # este es el ID que usaste; pero ojo con errores de instalación :contentReference[oaicite:2]{index=2}
         "LibreOffice"         = "TheDocumentFoundation.LibreOffice"
         "Microsoft PowerToys"  = "Microsoft.PowerToys"
     }
@@ -41,11 +41,12 @@ $global:ApplicationCategories = @{
         "Git"                 = "Git.Git"
         "Python"              = "Python.Python.3.12"
         "Node.js"             = "OpenJS.NodeJS"
-        "Docker Desktop"      = "Docker.DockerDesktop"
+        "Docker Desktop"      = "Docker.DockerDesktop"       # confirmado como válido :contentReference[oaicite:3]{index=3}
         "CPU-Z"               = "CPUID.CPU-Z"
         "GPU-Z"               = "TechPowerUp.GPU-Z"
     }
 }
+
 
 function Get-ApplicationCategories {
     return $global:ApplicationCategories

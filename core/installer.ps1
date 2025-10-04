@@ -1,6 +1,10 @@
 # Modulo de instalacion de aplicaciones usando Winget
 
-function Test-WingetAvailability {
+# Hacer las funciones disponibles globalmente
+$global:InstallAppsFunction = $null
+$global:InstallSingleAppFunction = $null
+
+function global:Test-WingetAvailability {
     [CmdletBinding()]
     param()
     
@@ -34,7 +38,7 @@ function Test-WingetAvailability {
     }
 }
 
-function Install-Apps {
+function global:Install-Apps {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory)]
@@ -100,7 +104,7 @@ function Install-Apps {
     Show-InstallationSummary -SuccessCount $successCount -ErrorCount $errorCount -ErrorApps $errorApps
 }
 
-function Install-SingleApp {
+function global:Install-SingleApp {
     [CmdletBinding()]
     [OutputType([PSCustomObject])]
     param(
@@ -143,7 +147,7 @@ function Install-SingleApp {
     }
 }
 
-function Get-ApplicationIdFromCategories {
+function global:Get-ApplicationIdFromCategories {
     [CmdletBinding()]
     [OutputType([string])]
     param(
@@ -164,7 +168,7 @@ function Get-ApplicationIdFromCategories {
     return $null
 }
 
-function Show-InstallationSummary {
+function global:Show-InstallationSummary {
     [CmdletBinding()]
     param(
         [int]$SuccessCount,
@@ -185,4 +189,18 @@ function Show-InstallationSummary {
     }
     
     Write-Host ""
+}
+
+# Función de prueba para verificar que las funciones están disponibles
+function global:Test-InstallerFunctions {
+    $functions = @('Install-Apps', 'Install-SingleApp', 'Get-ApplicationIdFromCategories', 'Show-InstallationSummary', 'Test-WingetAvailability')
+    
+    Write-Host "Verificando funciones del instalador..." -ForegroundColor Cyan
+    foreach ($func in $functions) {
+        if (Get-Command $func -ErrorAction SilentlyContinue) {
+            Write-Host "  ✅ $func" -ForegroundColor Green
+        } else {
+            Write-Host "  ❌ $func" -ForegroundColor Red
+        }
+    }
 }

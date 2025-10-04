@@ -150,14 +150,24 @@ function Show-Toolbox {
                 $installBtn.Enabled = $false
                 
                 try {
-                    Install-Apps -AppNames $selectedApps -Categories $Categories -ShowProgress
+                    # Usar función wrapper que evita problemas de ámbito
+                    $result = Invoke-AppInstallation -AppNames $selectedApps -Categories $Categories -ShowProgress
                     
-                    [System.Windows.Forms.MessageBox]::Show(
-                        "Instalacion completada. Revisa la consola para mas detalles.",
-                        "Instalacion completada",
-                        [System.Windows.Forms.MessageBoxButtons]::OK,
-                        [System.Windows.Forms.MessageBoxIcon]::Information
-                    )
+                    if ($result.Success) {
+                        [System.Windows.Forms.MessageBox]::Show(
+                            "Instalacion completada exitosamente.`n`nExitosas: $($result.SuccessCount)`nFallidas: $($result.ErrorCount)",
+                            "Instalacion completada",
+                            [System.Windows.Forms.MessageBoxButtons]::OK,
+                            [System.Windows.Forms.MessageBoxIcon]::Information
+                        )
+                    } else {
+                        [System.Windows.Forms.MessageBox]::Show(
+                            "Instalacion completada con errores.`n`nExitosas: $($result.SuccessCount)`nFallidas: $($result.ErrorCount)`n`nRevisa la consola para mas detalles.",
+                            "Instalacion con errores",
+                            [System.Windows.Forms.MessageBoxButtons]::OK,
+                            [System.Windows.Forms.MessageBoxIcon]::Warning
+                        )
+                    }
                 }
                 catch {
                     [System.Windows.Forms.MessageBox]::Show(
